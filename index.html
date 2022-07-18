@@ -62,7 +62,7 @@
     <!-- Three.js setup -->
     <script type="module">
 
-      import {GLTFLoader} from './GLTFLoader.js';
+      import {GLTFLoader} from './js/GLTFLoader.js';
     
       // Scene
       const scene = new THREE.Scene();   
@@ -102,7 +102,7 @@
       // Loader
       var loader = new GLTFLoader();
       var obj;
-      loader.load("tips1.gltf", function(gltf){
+      loader.load("g4.gltf", function(gltf){
         obj = gltf.scene;
         scene.add(gltf.scene);
       });
