@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>NSK</title>
+    <!-- MDB icon -->
+    <link rel="icon" href="img/icon.png" type="image/x-icon" />
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
+    />
+    <!-- Google Fonts Roboto -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .webgl {
+        position: absolute;
+        top: 0;
+        left: 0;
+        outline: none;
+        z-index: -1;
+      }
+      .canvas {
+        display: block;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container text-center">
+      <h1 class="my-5">NSK Tips 3D visual</h1>
+      <h2>
+        With the use of MDB UI KIT
+      </h2>
+    </div>
+
+    <canvas class="webgl"></canvas>
+
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.10.1/mdb.min.js"
+    ></script>
+
+    <!-- Three.js core -->
+    <script type="text/javascript" src="three.min.js"></script>
+    <script type="module" src="GLTFLoader.js"></script>
+
+    <!-- Three.js setup -->
+    <script type="module">
+
+      import {GLTFLoader} from './GLTFLoader.js';
+    
+      // Scene
+      const scene = new THREE.Scene();   
+
+      /**
+       * Sizes
+       */
+      const sizes = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+
+      
+
+      /**
+       * Camera
+       */
+      // Base camera
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        sizes.width / sizes.height,
+        0.1,
+        1000
+      );
+
+      /**
+       * Renderer
+       */
+      const renderer = new THREE.WebGLRenderer({
+        // canvas: canvas,
+      });
+      renderer.setSize(sizes.width, sizes.height);
+      // renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      document.body.appendChild(renderer.domElement);
+
+      
+      // Loader
+      var loader = new GLTFLoader();
+      var obj;
+      loader.load("tips1.gltf", function(gltf){
+        obj = gltf.scene;
+        scene.add(gltf.scene);
+      });
+      scene.bacground = new THREE.Color(0xffffff);
+  
+      var light = new THREE.HemisphereLight(0xffffff, 0x000000, 10);
+      scene.add(light);
+      camera.position.set(0, 0, 0);
+      function animate(){
+        requestAnimationFrame(animate);
+        obj.rotation.y += 0.01;
+        renderer.render(scene, camera);
+      }
+      animate();
+
+      // tick();
+    </script>
+  </body>
+</html>
