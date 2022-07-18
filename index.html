@@ -108,8 +108,18 @@
       });
       scene.bacground = new THREE.Color(0xffffff);
   
-      var light = new THREE.HemisphereLight(0xffffff, 0x000000, 10);
+      var light = new THREE.SpotLight(0xffffff);
+      light.position.set(0, 10, 10);
       scene.add(light);
+
+      var light = new THREE.SpotLight(0xffffff);
+      light.position.set(0, 10, 0);
+      scene.add(light);
+
+      var light = new THREE.SpotLight(0xffffff);
+      light.position.set(0, 0, 10);
+      scene.add(light);
+
       camera.position.z = 0.5;
       function animate(){
         requestAnimationFrame(animate);
