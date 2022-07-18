@@ -41,12 +41,12 @@
     </style>
   </head>
   <body>
-    <div class="container text-center">
+    <!-- <div class="container text-center">
       <h1 class="my-5">NSK Tips 3D visual</h1>
       <h2>
         With the use of MDB UI KIT
       </h2>
-    </div>
+    </div> -->
 
     <canvas class="webgl"></canvas>
 
@@ -58,6 +58,7 @@
     <!-- Three.js core -->
     <script type="text/javascript" src="three.min.js"></script>
     <script type="module" src="GLTFLoader.js"></script>
+    <script src="js/OrbitControls.js"></script>
 
     <!-- Three.js setup -->
     <script type="module">
@@ -120,10 +121,12 @@
       light.position.set(0, 0, 10);
       scene.add(light);
 
+      const controls = new THREE.OrbitControls( camera, renderer.domElement );
+
       camera.position.z = 0.5;
       function animate(){
         requestAnimationFrame(animate);
-        obj.rotation.y += 0.01;
+        // obj.rotation.y += 0.01;
         renderer.render(scene, camera);
       }
       animate();
